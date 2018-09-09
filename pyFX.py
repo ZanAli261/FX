@@ -1,4 +1,4 @@
-## grabs FX rate data
+## grabs FX rate data for one month
 
 from datetime import datetime
 from forex_python.converter import get_rate
@@ -7,11 +7,13 @@ import pandas as pd
 
 rate1 = 'USD' #input()
 rate2 = 'GBP' #input()
+year = 2018 #input()
+month = 8 #input()
 dateList = []
 rateList = []
 
 for i in range(1,11):
-    d = datetime(2018, 8, i)
+    d = datetime(year, month, i)
     fx = get_rate(rate1, rate2, d)
     dateList.append(str(d))
     rateList.append(fx)
