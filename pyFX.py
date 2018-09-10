@@ -5,20 +5,26 @@ from forex_python.converter import get_rate
 import matplotlib.pyplot as plt
 import pandas as pd
 
-rate1 = 'USD' #input()
-rate2 = 'GBP' #input()
+rateUSD = 'USD' #input()
+rate1 = 'GBP' #input()
+rate2 = 'EUR' #input()
 year = 2018 #input()
 month = 8 #input()
 dateList = []
-rateList = []
+rate1List = []
+rate2List = []
 
-for i in range(1,11):
+for i in range(1,30):
     d = datetime(year, month, i)
-    fx = get_rate(rate1, rate2, d)
+    fx1 = get_rate(rate1, rateUSD, d)
+    fx2 = get_rate(rate2, rateUSD, d)
     dateList.append(str(d))
-    rateList.append(fx)
+    rate1List.append(fx1)
+    rate2List.append(fx2)
 
-forexDict = {'date': dateList, 'rate': rateList}
+forexDict = {'date': dateList, 
+             'rate1': rate1List,
+             'rate2': rate2List}
 forexDF = pd.DataFrame.from_dict(data=forexDict)
 forexDF['date'] = pd.to_datetime(forexDF['date'])
 forexDF.set_index('date', inplace=True)
@@ -26,6 +32,7 @@ forexDF.set_index('date', inplace=True)
 plt.plot(forexDF)
 plt.xlabel('Date')
 plt.xticks(rotation=60)
-plt.ylabel(rate1 + ' to ' + rate2)
-plt.title('FX Movement')
+plt.ylabel('Currency to USD')
+plt.title('FX Movement Against ' + rate1)
+plt.legend([rate1, rate2])
 plt.show()
