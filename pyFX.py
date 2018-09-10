@@ -1,6 +1,7 @@
 ## grabs FX rate data for one month
 
 from datetime import datetime
+import calendar as cal
 from forex_python.converter import get_rate
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -13,8 +14,9 @@ month = 8 #input()
 dateList = []
 rate1List = []
 rate2List = []
+dayCount = cal.monthrange(year, month)[1]
 
-for i in range(1,30):
+for i in range(1,dayCount + 1):
     d = datetime(year, month, i)
     fx1 = get_rate(rate1, rateUSD, d)
     fx2 = get_rate(rate2, rateUSD, d)
