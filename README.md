@@ -1,2 +1,2 @@
 # FX
-Visualization of currency movement
+Quick Visualization of currency movements against USD
